@@ -22,10 +22,10 @@ locals {
 
   default_roles_definition = {
     readonly = {
-      stage_grants = ["USAGE"]
+      integration_grants = ["USAGE"]
     }
     admin = {
-      stage_grants = ["USAGE", "OWNERSHIP"]
+      integration_grants = ["USAGE", "OWNERSHIP"]
     }
   }
 
