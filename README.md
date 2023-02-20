@@ -17,8 +17,7 @@ Terraform module for Snowflake storage integration management.
 * Creates Snowflake storage integration
 * Can create custom Snowflake roles with role-to-role, role-to-user assignments
 * Can create a set of default roles to simplify access management:
-    * `READONLY` - granted `USAGE` privilage
-    * `ADMIN` - Full access, including schema options like `type` and `storage_provider`
+    * `READONLY` - granted `USAGE` privilege
 
 ## USAGE
 
