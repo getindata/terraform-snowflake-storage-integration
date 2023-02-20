@@ -24,9 +24,6 @@ locals {
     readonly = {
       integration_grants = ["USAGE"]
     }
-    admin = {
-      integration_grants = ["USAGE", "OWNERSHIP"]
-    }
   }
 
   provided_roles = { for role_name, role in var.roles : role_name => {

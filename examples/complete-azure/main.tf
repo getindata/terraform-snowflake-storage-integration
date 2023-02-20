@@ -1,12 +1,5 @@
 data "azurerm_client_config" "current" {}
 
-module "snowflake_admin_role" {
-  source  = "getindata/role/snowflake"
-  version = "1.0.3"
-  context = module.this.context
-  name    = "admin"
-}
-
 module "snowflake_dev_role" {
   source  = "getindata/role/snowflake"
   version = "1.0.3"
@@ -57,9 +50,6 @@ module "storage_integration" {
   roles = {
     readonly = {
       granted_to_roles = [module.snowflake_dev_role.name]
-    }
-    admin = {
-      granted_to_roles = [module.snowflake_admin_role.name]
     }
   }
 }
