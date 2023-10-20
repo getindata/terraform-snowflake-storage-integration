@@ -18,7 +18,7 @@ module "resource_group" {
 
 module "azure_storage_account" {
   source  = "getindata/storage-account/azurerm"
-  version = "1.3.0"
+  version = "1.7.1"
   context = module.this.context
 
   name                = "datalake"
