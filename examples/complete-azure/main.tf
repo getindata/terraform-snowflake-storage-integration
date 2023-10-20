@@ -2,7 +2,7 @@ data "azurerm_client_config" "current" {}
 
 module "snowflake_dev_role" {
   source  = "getindata/role/snowflake"
-  version = "1.0.3"
+  version = "1.1.0"
   context = module.this.context
   name    = "dev"
 }
