@@ -9,7 +9,7 @@ module "snowflake_dev_role" {
 
 module "resource_group" {
   source  = "getindata/resource-group/azurerm"
-  version = "1.1.0"
+  version = "1.2.1"
   context = module.this.context
 
   name     = var.resource_group_name
