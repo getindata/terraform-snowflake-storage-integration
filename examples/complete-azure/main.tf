@@ -1,10 +1,7 @@
 data "azurerm_client_config" "current" {}
 
-module "snowflake_dev_role" {
-  source  = "getindata/role/snowflake"
-  version = "1.0.3"
-  context = module.this.context
-  name    = "dev"
+resource "snowflake_account_role" "dev_role" {
+  name = "developer"
 }
 
 module "resource_group" {
@@ -37,8 +34,8 @@ module "storage_integration" {
   source  = "../../"
   context = module.this.context
 
-  name    = "my_integration"
-  comment = "This is my stage"
+  name    = "azure"
+  comment = "azure storage integration"
 
   type                      = "EXTERNAL_STAGE"
   storage_provider          = "AZURE"
@@ -49,7 +46,7 @@ module "storage_integration" {
   create_default_roles = true
   roles = {
     readonly = {
-      granted_to_roles = [module.snowflake_dev_role.name]
+      granted_to_roles = [snowflake_account_role.dev_role.name]
     }
   }
 }

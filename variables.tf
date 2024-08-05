@@ -71,7 +71,11 @@ variable "roles" {
     granted_roles        = optional(list(string))
     granted_to_roles     = optional(list(string))
     granted_to_users     = optional(list(string))
-    integration_grants   = optional(list(string))
+    integration_grants = optional(object({
+      all_privileges    = optional(bool)
+      with_grant_option = optional(bool, false)
+      privileges        = optional(list(string))
+    }))
   }))
   default = {}
 }
