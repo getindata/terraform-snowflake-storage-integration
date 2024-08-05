@@ -5,7 +5,6 @@ locals {
     lookup(module.storage_integration_label.descriptors, var.descriptor_name, module.storage_integration_label.id), "/${module.storage_integration_label.delimiter}${module.storage_integration_label.delimiter}+/", module.storage_integration_label.delimiter
   ), module.storage_integration_label.delimiter) : null
 
-  enabled              = module.this.enabled
   create_default_roles = module.this.enabled && var.create_default_roles
 
   #This needs to be the same as an object in roles variable
@@ -17,12 +16,16 @@ locals {
     granted_roles        = []
     granted_to_roles     = []
     granted_to_users     = []
-    integration_grants   = []
+    integration_grants   = {}
   }
 
   default_roles_definition = {
     readonly = {
-      integration_grants = ["USAGE"]
+      integration_grants = {
+        privileges        = ["USAGE"]
+        with_grant_option = false
+        all_privileges    = null
+      }
     }
   }
 
