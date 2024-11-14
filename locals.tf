@@ -1,16 +1,17 @@
 locals {
-  # Get a name from the descriptor. If not available, use default naming convention.
-  # Trim and replace function are used to avoid bare delimiters on both ends of the name and situation of adjacent delimiters.
-  name_from_descriptor = module.storage_integration_label.enabled ? trim(replace(
-    lookup(module.storage_integration_label.descriptors, var.descriptor_name, module.storage_integration_label.id), "/${module.storage_integration_label.delimiter}${module.storage_integration_label.delimiter}+/", module.storage_integration_label.delimiter
-  ), module.storage_integration_label.delimiter) : null
+  context_template = lookup(var.context_templates, var.name_scheme.context_template_name, null)
 
-  create_default_roles = module.this.enabled && var.create_default_roles
+  default_role_naming_scheme = {
+    properties            = ["prefix", "environment", "storage-integration", "name"]
+    context_template_name = "snowflake-storage-integration-role"
+    extra_values = {
+      prefix              = "sti"
+      storage-integration = var.name
+    }
+  }
 
   #This needs to be the same as an object in roles variable
   role_template = {
-    descriptor_name      = "snowflake-role"
-    enabled              = true
     comment              = null
     role_ownership_grant = "SYSADMIN"
     granted_roles        = []
@@ -43,7 +44,7 @@ locals {
 
   default_roles = {
     for role_name, role in local.roles_definition : role_name => role
-    if contains(keys(local.default_roles_definition), role_name)
+    if contains(keys(local.default_roles_definition), role_name) && var.create_default_roles
   }
   custom_roles = {
     for role_name, role in local.roles_definition : role_name => role
