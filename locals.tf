@@ -8,6 +8,7 @@ locals {
       prefix              = "sti"
       storage-integration = var.name
     }
+    uppercase = var.name_scheme.uppercase
   }
 
   #This needs to be the same as an object in roles variable

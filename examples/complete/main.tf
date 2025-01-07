@@ -20,6 +20,9 @@ module "storage_integration" {
   roles = {
     readonly = {
       granted_to_roles = [snowflake_account_role.dev_role.name]
+      name_scheme = {
+        uppercase = false
+      }
     }
   }
 }
