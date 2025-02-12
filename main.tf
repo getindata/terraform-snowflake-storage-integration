@@ -42,7 +42,7 @@ module "snowflake_default_role" {
   name = each.key
   name_scheme = merge(
     local.default_role_naming_scheme,
-    lookup(each.value, "name_scheme", {})
+    { for k, v in lookup(each.value, "name_scheme", {}) : k => v if v != null }
   )
 
   role_ownership_grant = lookup(each.value, "role_ownership_grant", "SYSADMIN")
@@ -71,7 +71,7 @@ module "snowflake_custom_role" {
   name = each.key
   name_scheme = merge(
     local.default_role_naming_scheme,
-    lookup(each.value, "name_scheme", {})
+    { for k, v in lookup(each.value, "name_scheme", {}) : k => v if v != null }
   )
   granted_to_users = lookup(each.value, "granted_to_users", [])
   granted_to_roles = lookup(each.value, "granted_to_roles", [])

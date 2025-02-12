@@ -2,11 +2,11 @@ locals {
   context_template = lookup(var.context_templates, var.name_scheme.context_template_name, null)
 
   default_role_naming_scheme = {
-    properties            = ["prefix", "environment", "storage-integration", "name"]
+    properties            = ["prefix", "environment", "integration", "name"]
     context_template_name = "snowflake-storage-integration-role"
     extra_values = {
-      prefix              = "sti"
-      storage-integration = var.name
+      prefix      = "sti"
+      integration = var.name
     }
     uppercase = var.name_scheme.uppercase
   }
