@@ -36,6 +36,7 @@ output "roles" {
 output "azure_consent_url" {
   description = "The consent URL that is used to create an Azure Snowflake service principle inside your tenant"
   value       = snowflake_storage_integration.this.azure_consent_url
+  sensitive   = true
 }
 
 output "azure_multi_tenant_app_name" {

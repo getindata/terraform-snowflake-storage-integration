@@ -104,7 +104,7 @@ terraform apply tfplan
 
 | Name | Version |
 |------|---------|
-| <a name="provider_snowflake"></a> [snowflake](#provider\_snowflake) | ~> 0.94 |
+| <a name="provider_snowflake"></a> [snowflake](#provider\_snowflake) | >= 0.94 |
 
 ## Requirements
 
@@ -112,11 +112,11 @@ terraform apply tfplan
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
 | <a name="requirement_context"></a> [context](#requirement\_context) | >=0.4.0 |
-| <a name="requirement_snowflake"></a> [snowflake](#requirement\_snowflake) | ~> 0.94 |
+| <a name="requirement_snowflake"></a> [snowflake](#requirement\_snowflake) | >= 0.94 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [snowflake_account_role.dev_role](https://registry.terraform.io/providers/Snowflake-Labs/snowflake/latest/docs/resources/account_role) | resource |
+| [snowflake_account_role.dev_role](https://registry.terraform.io/providers/snowflakedb/snowflake/latest/docs/resources/account_role) | resource |
 <!-- END_TF_DOCS -->

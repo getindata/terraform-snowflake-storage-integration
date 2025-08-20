@@ -49,6 +49,32 @@ List od code and variable (API) changes:
   - `context_templates`
   - `name_schema`
 
+## Breaking changes in v4.x of the module
+
+- Due to rename of Snowflake terraform provider source, all `versions.tf` files were updated accordingly.
+
+  Please keep in mind to mirror this change in your own repos also.
+
+  For more information about provider rename, refer to [Snowflake documentation](https://github.com/snowflakedb/terraform-provider-snowflake/blob/main/SNOWFLAKEDB_MIGRATION.md).
+
+- Maximal version of supported provider was also unblocked in version `v4.1.x` , so keep in mind that, starting with Snowflake provider version `1.x`, the `snowflake_stage` resource is considered a preview feature and must be explicitly enabled in the provider configuration.
+
+  **Required Provider Configuration:**
+
+  ```terraform
+  provider "snowflake" {
+    preview_features_enabled = ["snowflake_storage_integration_resource"]
+  }
+  ```
+
+  Without this configuration, you will encounter the following error:
+
+  ```shell
+  Error: snowflake_storage_integration_resource is currently a preview feature, and must be enabled by adding snowflake_storage_integration_resource to preview_features_enabled in Terraform configuration.
+  ```
+
+  For more information about preview features, refer to the [Snowflake provider documentation](https://registry.terraform.io/providers/snowflakedb/snowflake/latest/docs/resources/stage#preview-features) and [Snowflake storage integration resource documentation](https://registry.terraform.io/providers/snowflakedb/snowflake/2.2.0/docs/resources/storage_integration).
+
 ## USAGE
 
 ```terraform
@@ -102,8 +128,8 @@ module "snowflake_storage_integration" {
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_roles_deep_merge"></a> [roles\_deep\_merge](#module\_roles\_deep\_merge) | Invicton-Labs/deepmerge/null | 0.1.5 |
-| <a name="module_snowflake_custom_role"></a> [snowflake\_custom\_role](#module\_snowflake\_custom\_role) | getindata/role/snowflake | 3.1.0 |
-| <a name="module_snowflake_default_role"></a> [snowflake\_default\_role](#module\_snowflake\_default\_role) | getindata/role/snowflake | 3.1.0 |
+| <a name="module_snowflake_custom_role"></a> [snowflake\_custom\_role](#module\_snowflake\_custom\_role) | getindata/role/snowflake | 4.0.0 |
+| <a name="module_snowflake_default_role"></a> [snowflake\_default\_role](#module\_snowflake\_default\_role) | getindata/role/snowflake | 4.0.0 |
 
 ## Outputs
 
@@ -131,7 +157,7 @@ module "snowflake_storage_integration" {
 | Name | Version |
 |------|---------|
 | <a name="provider_context"></a> [context](#provider\_context) | >=0.4.0 |
-| <a name="provider_snowflake"></a> [snowflake](#provider\_snowflake) | ~> 0.94 |
+| <a name="provider_snowflake"></a> [snowflake](#provider\_snowflake) | >= 0.94 |
 
 ## Requirements
 
@@ -139,13 +165,13 @@ module "snowflake_storage_integration" {
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
 | <a name="requirement_context"></a> [context](#requirement\_context) | >=0.4.0 |
-| <a name="requirement_snowflake"></a> [snowflake](#requirement\_snowflake) | ~> 0.94 |
+| <a name="requirement_snowflake"></a> [snowflake](#requirement\_snowflake) | >= 0.94 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [snowflake_storage_integration.this](https://registry.terraform.io/providers/Snowflake-Labs/snowflake/latest/docs/resources/storage_integration) | resource |
+| [snowflake_storage_integration.this](https://registry.terraform.io/providers/snowflakedb/snowflake/latest/docs/resources/storage_integration) | resource |
 | [context_label.this](https://registry.terraform.io/providers/cloudposse/context/latest/docs/data-sources/label) | data source |
 <!-- END_TF_DOCS -->
 
